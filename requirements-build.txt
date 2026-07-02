@@ -1,0 +1,7 @@
+# Build dependencies
+PyInstaller==6.4.0
+wheel==0.42.0
+setuptools==69.1.0
+
+# All runtime requirements
+-r requirements.txt
