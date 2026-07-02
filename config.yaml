@@ -1,0 +1,22 @@
+# Crash Analytics Pro Configuration
+
+app:
+  name: Crash Analytics Pro
+  version: 1.0.0
+  debug: false
+
+database:
+  type: sqlite
+  path: data/analytics.db
+
+ui:
+  theme: dark
+  window_width: 1400
+  window_height: 900
+
+import:
+  csv:
+    enabled: true
+    delimiter: ','
+  json:
+    enabled: true

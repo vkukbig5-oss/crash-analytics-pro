@@ -1,88 +1,104 @@
 # Crash Analytics Pro
 
-A production-quality desktop analytics platform with a plugin-based architecture for processing authorized data from multiple sources. Built with Python 3.13, PySide6, and PyQtGraph.
+## Requirements
 
-## Features
+- Python 3.9+
+- SQLite3
 
-- **Plugin-based Reader Architecture**: Modular data ingestion from authorized sources
-- **Real-time Data Streaming**: Live data processing and visualization
-- **SQLite Storage**: Complete historical records with efficient querying
-- **Professional Desktop Dashboard**: Built with PySide6 (Qt)
-- **Advanced Charts & Statistics**: PyQtGraph-based visualizations
-- **Time-period Filtering**: Flexible date range selection
-- **Data Export**: CSV and Excel export capabilities
-- **Extensible Design**: Add new Readers without modifying the core analytics engine
+## Installation
 
-## Architecture Overview
-
-```
-crash-analytics-pro/
-├── src/
-│   ├── analytics/           # Core analytics engine
-│   ├── readers/             # Plugin-based data readers
-│   ├── database/            # SQLite layer
-│   ├── ui/                  # PySide6 desktop interface
-│   ├── charts/              # PyQtGraph visualizations
-│   ├── statistics/          # Statistical calculations
-│   ├── config/              # Configuration management
-│   └── utils/               # Utilities and helpers
-├── tests/                   # Unit and integration tests
-├── resources/               # Icons, stylesheets
-├── config/                  # Configuration files
-├── requirements.txt         # Python dependencies
-├── pyinstaller.spec         # PyInstaller configuration
-└── setup.py                 # Package setup
-```
-
-## Getting Started
-
-### Prerequisites
-- Python 3.13+
-- pip
-
-### Installation
-
+1. Clone the repository:
 ```bash
 git clone https://github.com/vkukbig5-oss/crash-analytics-pro.git
 cd crash-analytics-pro
-pip install -r requirements.txt
-python -m src.main
 ```
 
-### Building Desktop Application
-
+2. Create virtual environment:
 ```bash
-pip install -r requirements-build.txt
-pyinstaller pyinstaller.spec
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-## Plugin Architecture
-
-Readers are plugins that accept authorized data. Extend `BaseReader` to create custom Readers:
-
-```python
-from src.readers.base import BaseReader
-
-class CustomReader(BaseReader):
-    def validate_data(self, data: dict) -> bool:
-        # Validate incoming data
-        pass
-    
-    def process_record(self, data: dict) -> dict:
-        # Transform to standardized format
-        pass
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-## Data Authorization
+## Usage
 
-This platform is designed for authorized data sources only:
+Run the application:
+```bash
+python main.py
+```
 
-- ✅ Direct CSV/JSON imports
-- ✅ Authenticated API endpoints
-- ✅ Manual data entry
-- ❌ No automated login or auth bypass
-- ❌ No website scraping
+## Features
+
+- **Data Import**: CSV and JSON file import support
+- **Analytics Dashboard**: Real-time statistics and performance tracking
+- **Charts & Graphs**: Visual representation of data trends
+- **History Viewer**: Detailed round-by-round history
+- **Data Export**: Export to CSV and Excel formats
+- **Advanced Analytics**: Streak analysis, volatility calculation, session tracking
+
+## Architecture
+
+```
+src/
+├── database/        # Database models and operations
+├── readers/         # CSV and JSON readers
+├── statistics/      # Statistical calculations
+├── analytics/       # Advanced analytics engine
+├── ui/             # PySide6 user interface
+└── utils/          # Utility functions
+
+tests/              # Unit tests
+main.py             # Application entry point
+config.yaml         # Configuration file
+```
+
+## Project Structure
+
+### Database Layer (`src/database/`)
+- SQLAlchemy models for rounds data
+- Database operations and session management
+
+### Readers (`src/readers/`)
+- CSV file reader with validation
+- JSON file reader with standardization
+- Data normalization and error handling
+
+### Statistics (`src/statistics/`)
+- Summary statistics calculation
+- Hourly and daily statistics
+- Win rate and ROI analysis
+
+### Analytics (`src/analytics/`)
+- Streak analysis (win/loss patterns)
+- Volatility calculation
+- Session tracking and analysis
+- Burn rate computation
+
+### UI (`src/ui/`)
+- Main window with tabbed interface
+- Dashboard with PyQtGraph charts
+- History viewer with filtering
+- Export functionality
+
+## Configuration
+
+Edit `config.yaml` to customize:
+- Database location
+- UI theme and dimensions
+- Import format settings
+- Debug mode
+
+## Testing
+
+Run unit tests:
+```bash
+python -m pytest tests/
+```
 
 ## License
 
-MIT License - See LICENSE file
+MIT License
